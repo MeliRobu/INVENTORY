@@ -69,7 +69,7 @@ print(f"\n\t***INVOICE*** \nThe product name is: {name_product} \nThe product am
 
 #This script ask if the user what to continue ingressing products}
 def another(): 
-    another_product= input("Do you want to ingress another product? (type y/n): ").lower
+    another_product= input("Do you want to ingress another product? (type y/n): ").lower()
     if another_product == "y" or another_product == "n":
         return another_product
     else: 
