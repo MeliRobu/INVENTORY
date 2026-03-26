@@ -1,5 +1,5 @@
 import os
-os.system("clear")
+os.system("cls")
 # INVENTORY
 # This script is a welcome message that initialize the whole program
 print("\t***HI! Here you can ingress any product and update your inventory***")
@@ -69,7 +69,7 @@ print(f"\n\t***INVOICE*** \nThe product name is: {name_product} \nThe product am
 
 #This script ask if the user what to continue ingressing products}
 def another(): 
-    another_product= input("Do you want to ingress another product? (type y/n): ").lower
+    another_product= input("Do you want to ingress another product? (type y/n): ").lower()
     if another_product == "y" or another_product == "n":
         return another_product
     else: 
@@ -77,17 +77,17 @@ def another():
         return another() 
 
 #This script parses the user answer (yes or no), through a while, so, the user can ingress whenever product while aswering yes
-while another()== "y":
+while another() == "y":
     name_product= product()
     amount_variable= amount()
     price_variable= price()
     total_amount= amount_variable*price_variable
     inventory.append(dictionary())
     print(f"\n\t***INVOICE*** \nThe product name is: {name_product} \nThe product amount is: {amount_variable} \nThe product price is: {price_variable} \nThe total amount is: {total_amount} ")
-    
+
 #This script displays a finished message, if the while loop is break
 print("\n\t***Process finished, have a nice day***")
-        
+            
 #This script displays the product list, with all the entered inventory items, using a for to run and watch each product from the list.
 print("\n***FINAL INVENTORY***")
 for i,products in enumerate (inventory):
