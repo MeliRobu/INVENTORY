@@ -52,17 +52,23 @@ def show_inventory():
         print(f"{i+1} - Product: {products['product_name']}, Price: {products["product_price"]}, Amount: {products["product_amount"]}, Total: {products["total"]}")
 
 def menu_option():
-    option=int(input("\nChoose an option (the number): "))
     try:
-        if 0 < option <=4:
+        option= int(input("\nChoose an option (the number): "))
+        if 0< option <=4:
             return option
         else:
             print("Wrong option")
-            return menu_option()
-    except:
+            return menu_option()   
+    except ValueError:
         print("Wrong option")
-        return menu_option()
-    
+        return menu_option()   
+
+def stadistics():
+        total_global= 0
+        print(f"\nThere are {len(inventory)} products added")
+        for product in inventory:
+            total_global += product["total"]
+        print (f"The total price of the inventory is: {total_global}")
 menu= True
 while menu:
     print("MENU: \n 1.Add product \n2.Show inventory\n3.Calculate stadistics \n4.Exit")
@@ -76,11 +82,10 @@ while menu:
         else:
             show_inventory()
     elif option ==3:
-        total_global= 0
-        print(f"\nThere are {len(inventory)} products added")
-        for product in inventory:
-            total_global += product["total"]
-            print (f"The total price of the inventory is: {total_global}")
+        stadistics()
+    elif option ==4:
+        print("***Process finished... Closing program...***")
+        menu = False
 
 
     #elif option ==3:
