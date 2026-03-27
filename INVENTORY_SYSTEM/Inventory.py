@@ -3,8 +3,10 @@ import os
 os.system("clear")
 # INVENTORY
 # This script is a welcome message that initialize the whole program
-print("\t***HI! Here you can ingress any product and update your inventory***")
-
+print("\t  ------------------------")
+print("\t| WELCOME TO THE INVENTORY |" )
+print("\t  ------------------------ ")
+print("\n***Here you can ingress any product and update your inventory***")
 # Here is defined a function named "product()", is responsible of request to the user the product name
 # It contains conditions to handle typing errors 
 def product():
@@ -42,13 +44,15 @@ def amount():
         print("Please type a number")
         return amount()
         
-#H ere we invoke the function "product()"
+#H ere we invoke the function "product() and store function results"
 name_product=product()
 #In line 45 and 46 this 2 new variables store function results 
 amount_variable=amount()
 price_variable=price()
 #This script calculates total amount 
-total_amount= amount_variable*price_variable
+def multiply(a , b):
+    print (a*b)
+multiply (amount_variable, price_variable)
 
 #In line 52 is defined a function named dictionary() that returns the keys and the values of each asked variable above.
 #This creates an organized data storage.
