@@ -38,7 +38,7 @@ def amount():
 def menu_option():
     try:
         option= int(input("\n=> Choose an option (the number): "))
-        if 0< option <=4:
+        if 0< option <=6:
             return option
         else:
             print("\n|....Wrong option....|")
