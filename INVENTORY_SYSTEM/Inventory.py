@@ -1,3 +1,4 @@
+#This funtion allow us to clean the console
 import os
 os.system("clear")
 # INVENTORY
