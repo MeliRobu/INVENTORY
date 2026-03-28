@@ -1,7 +1,7 @@
 #Feature menu branch
 from validations import product, amount, price
 from inventory_list import inventory
-
+# Funtion for add a product
 def add_product():
     name_product=product()
     amount_variable=amount()
@@ -14,11 +14,12 @@ def add_product():
         "product_amount":amount_variable,
         "total": total
     }
-    
+#Fution for show the whole inventory
 def show_inventory():
     for i,products in enumerate (inventory):
         print(f"\n{i+1} - Product: {products['product_name']}, Price: {products["product_price"]}, Amount: {products["product_amount"]}, Total: {products["total"]}")
 
+#FUntions to show the stadistics,like the amount of product and de total price of the whole inventory
 
 def stadistics():
         total_global= 0
