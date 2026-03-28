@@ -42,15 +42,15 @@ def amount():
         print("Please type a number")
         return amount()
         
-#H ere we invoke the function "product()"
+#Here we invoke the function "product()"
 name_product=product()
-#In line 45 and 46 this 2 new variables store function results 
+#2 new variables store function results 
 amount_variable=amount()
 price_variable=price()
 #This script calculates total amount 
 total_amount= amount_variable*price_variable
 
-#In line 52 is defined a function named dictionary() that returns the keys and the values of each asked variable above.
+#Here is defined a function named dictionary() that returns the keys and the values of each asked variable above.
 #This creates an organized data storage.
 def dictionary():
     return {
@@ -61,7 +61,7 @@ def dictionary():
     }
 
 #This script contains a empthy list, in order to full it according to the given information.
-#In line 67, the dicionary is added to the list, using ".append()" function.
+#The dicionary is added to the list, using ".append()" function.
 inventory = []
 inventory.append(dictionary())
 
