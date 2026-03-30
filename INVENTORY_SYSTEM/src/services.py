@@ -1,16 +1,9 @@
 #Feature menu branch
 import csv
 import os
-
 from validations import product, amount, price
-from inventory_list import inventory
-DATA_FOLDER = "data"
-CSV_FILE= os.path.join(DATA_FOLDER, "inventory.csv")
-
-def folder_doesnot_exist():
-    if not os.path.exists(DATA_FOLDER):
-        os.makedirs(DATA_FOLDER)
-
+CARPETA_DATA = "data"
+ARCHIVO_CSV= os.path.join(CARPETA_DATA, "inventory.csv")#ruta para csv arvchivo
 # Funtion for add a product
 def add_product():
     name_product=product()
@@ -19,65 +12,63 @@ def add_product():
     total= amount_variable*price_variable
     print("\n***Product successfully added***")
     return {
-        "product_name":name_product,
-        "product_price": price_variable,
-        "product_amount":amount_variable,
+        "product":name_product,
+        "price": price_variable,
+        "amount":amount_variable,
         "total": total
     }
-# Reads all rows from a CSV file. Returns an empty list if the file doesn't exist.
-# Otherwise, returns a list of dictionaries with the CSV data.
-# Returns list ofCSV data as dictionaries or empty list if file not found.
-def reader_cvs():    
-    if not os.path.exists(CSV_FILE):
-        return [] 
-    with open(CSV_FILE, "r", newline="", encoding="utf-8") as file:
-        reader = csv.DictReader(file)
-        return list(reader)
+def crear_carpeta():
+     if not os.path.exists(CARPETA_DATA):
+          os.mkdir(CARPETA_DATA)
+def leer_registro():
+        if not os.path.exists(ARCHIVO_CSV):
+          return []
+        with open(ARCHIVO_CSV, 'r', newline='', encoding= 'utf-8') as file:
+            read = csv.DictReader(file)
+            return list(read)
 
-# Adds a new row to the CSV file.
-def create_register_csv(register):
-    folder_doesnot_exist()  
-    existing_file = os.path.exists(CSV_FILE)
-    with open(CSV_FILE, "a", newline="", encoding="utf-8") as file:
-        writer = csv.DictWriter(file, fieldnames=register.keys())
-        if not existing_file:
-            writer.writeheader()  
-        writer.writerow(register)  
-
-def update_cvs(name, price, amount, all_total):
-    register = reader_cvs()
-    if len(register) == 0:
-        return False  
+def registro_csv(registro):
+    crear_carpeta()
+    archivo_existe= os.path.exists(ARCHIVO_CSV)
+    with open(ARCHIVO_CSV, 'a', newline='', encoding= 'utf-8') as file:
+        write = csv.DictWriter(file, fieldnames=["product", "price", "amount", "total"])
+        if not archivo_existe:
+            write.writeheader()
+        write.writerow(registro)#Escribe nueva fila al final del archivo
+    
+        
+def actualizacion(name, product, new_data):
+    registros = leer_registro()
+    if len(registros)== 0:
+        return False
     updated = False
-    for register in register:
-        if register.get("product_name") == name:
-            register.update({"product_price": price, "product_amount": amount, "total": all_total})  # Cambia los datos de la fila
-            updated = True
-            break
+    for registro in registros:
+        if registro.get(product) == name:
+             registro.update(new_data)
+             updated = True
+             break
     if updated:
-        with open(CSV_FILE, "w", newline="", encoding="utf-8") as archivo:
-            writer = csv.DictWriter(archivo, fieldnames=register[0].keys())
-            writer.writeheader()
-            writer.writerows(register)  
+        with open(ARCHIVO_CSV, 'w', newline='', encoding= 'utf-8') as file:
+            write = csv.DictWriter(file, fieldnames= registros[0].keys())#extrae clve del primer diccionario
+            write.writeheader()
+            write.writerows(registros)
     return updated
 
-def deleter_csv(product):
-    register = reader_cvs()
-    if len(register) == 0:
-        return False 
-    new_register= []
+def delete(name, product):
+    registros= leer_registro()
+    if len(registros)== 0:
+        return False
+    new_register = []
     deleted = False
-    for r in register:
-        if r.get("product_name") == product:
-            deleted = True 
+    for registro in registros:
+        if registro.get(product) == name:
+              deleted = True
         else:
-            new_register.append(r) 
+            new_register.append(registro)
+
     if deleted:
-        with open(CSV_FILE, "w", newline="", encoding="utf-8") as archivo:
-            writer = csv.DictWriter(archivo, fieldnames=register[0].keys())
-            writer.writeheader()
-            writer.writerows(new_register)  
+        with open(ARCHIVO_CSV, 'w', newline='', encoding= 'utf-8') as file:
+            write = csv.DictWriter(file, fieldnames= registros[0].keys())#extrae clve del primer diccionario
+            write.writeheader()
+            write.writerows(new_register)
     return deleted
-
-
-
