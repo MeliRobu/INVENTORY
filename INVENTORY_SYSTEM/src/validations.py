@@ -1,6 +1,8 @@
 #VALIDATIONS
 # Here is defined a function named "product()", is responsible of request to the user the product name
 # It contains conditions to handle typing errors 
+from lista import inv_list
+
 def product():
     product_name= input("\no) Type the product name: ")
     if product_name.isalpha():
@@ -38,7 +40,7 @@ def amount():
 def menu_option():
     try:
         option= int(input("\n=> Choose an option (the number): "))
-        if 0< option <=6:
+        if 0< option <=9:
             return option
         else:
             print("\n|....Wrong option....|")
@@ -47,6 +49,17 @@ def menu_option():
         print("\n|....Wrong option....|")
         return menu_option()   
 
+def update_validation():
+    try:
+        option= int(input("\n=> Choose a product (the number): "))
+        if 0< option <= len(inv_list):
+            return option
+        else:
+            print("\n|....Wrong option....|")
+            return update_validation()   
+    except ValueError:
+        print("\n|....Wrong option....|")
+        return update_validation()
 
 
 
